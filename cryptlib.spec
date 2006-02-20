@@ -8,6 +8,7 @@ Group:		Libraries
 Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl322.zip
 # Source0-md5:	0944963faae4566f54aeb45c6e803142
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
+BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,11 +60,14 @@ Statyczna biblioteka cryptlib.
 %setup -q -T -c
 unzip -L -a %{SOURCE0}
 
+sed -i -e 's/ -O3 / %{rpmcflags} /' makefile
+
 %build
 %{__make} \
-	CMDC="%{rpmcflags}"
+	CC="%{__cc}"
+
 %{__make} shared \
-	CMDC="%{rpmcflags}"
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
