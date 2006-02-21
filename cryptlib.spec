@@ -1,7 +1,7 @@
 Summary:	Peter Gutmann's general purpose encryption library
 Summary(pl):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
-Version:	3.22
+Version:	3.2.2
 Release:	1
 License:	sleepycat
 Group:		Libraries
