@@ -1,5 +1,5 @@
 Summary:	Peter Gutmann's general purpose encryption library
-Summary(pl):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
+Summary(pl.UTF-8):   Biblioteka kryptograficzna ogÃ³lnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
 Version:	3.2.2
 Release:	1
@@ -21,18 +21,18 @@ SAFER-SK, Blowfish, and Blowfish-SK conventional encryption, MD2, MD4,
 MD5, RIPEMD-160 and SHA hash algorithms, and Diffie-Hellman, DSA, and
 RSA public-key encryption.
 
-%description -l pl
-Biblioteka kryptograficzna cryptlib udostêpnia ³atwy w u¿yciu
-interfejs pozwalaj±cy nawet niedo¶wiaczonym programistom kryptografii
-³atwo dodawaæ do swoich programów us³ugi kryptograficzne i
+%description -l pl.UTF-8
+Biblioteka kryptograficzna cryptlib udostÄ™pnia Å‚atwy w uÅ¼yciu
+interfejs pozwalajÄ…cy nawet niedoÅ›wiaczonym programistom kryptografii
+Å‚atwo dodawaÄ‡ do swoich programÃ³w usÅ‚ugi kryptograficzne i
 uwierzytelnienia. Biblioteka zawiera szyfry konwencjonalne DES, 3DES,
 IDEA, MDC/SHS, RC2, RC4, RC5, SAFER, SAFER-SK, Blowfish i Blowfish-SK,
-algorytmy skrótu MD2, MD4, MD5, RIPEMD-160 i SHA oraz szyfry klucza
+algorytmy skrÃ³tu MD2, MD4, MD5, RIPEMD-160 i SHA oraz szyfry klucza
 publicznego Diffie-Hellmana, DSA i RSA.
 
 %package devel
 Summary:	Header file for cryptlib library
-Summary(pl):	Plik nag³ówkowy biblioteki cryptlib
+Summary(pl.UTF-8):   Plik nagÅ‚Ã³wkowy biblioteki cryptlib
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -40,20 +40,20 @@ Requires:	%{name} = %{version}-%{release}
 The header file for developing applications that use the cryptlib
 cryptography library.
 
-%description devel -l pl
-Plik nag³ówkowy do tworzenia aplikacji korzystaj±cych z biblioteki
+%description devel -l pl.UTF-8
+Plik nagÅ‚Ã³wkowy do tworzenia aplikacji korzystajÄ…cych z biblioteki
 kryptograficznej cryptlib.
 
 %package static
 Summary:	Static cryptlib library
-Summary(pl):	Statyczna biblioteka cryptlib
+Summary(pl.UTF-8):   Statyczna biblioteka cryptlib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static cryptlib library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka cryptlib.
 
 %prep
