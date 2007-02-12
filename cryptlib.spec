@@ -1,5 +1,5 @@
 Summary:	Peter Gutmann's general purpose encryption library
-Summary(pl.UTF-8):   Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
+Summary(pl.UTF-8):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
 Version:	3.2.2
 Release:	1
@@ -32,7 +32,7 @@ publicznego Diffie-Hellmana, DSA i RSA.
 
 %package devel
 Summary:	Header file for cryptlib library
-Summary(pl.UTF-8):   Plik nagłówkowy biblioteki cryptlib
+Summary(pl.UTF-8):	Plik nagłówkowy biblioteki cryptlib
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -46,7 +46,7 @@ kryptograficznej cryptlib.
 
 %package static
 Summary:	Static cryptlib library
-Summary(pl.UTF-8):   Statyczna biblioteka cryptlib
+Summary(pl.UTF-8):	Statyczna biblioteka cryptlib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
