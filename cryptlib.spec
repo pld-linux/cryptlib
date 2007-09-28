@@ -1,16 +1,24 @@
+#
+%define		libver	3.3.0
+#
 Summary:	Peter Gutmann's general purpose encryption library
 Summary(pl.UTF-8):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
-Version:	3.2.2
-Release:	1
+Version:	3.3.1
+Release:	0.1
 License:	sleepycat
 Group:		Libraries
-Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl322.zip
-# Source0-md5:	0944963faae4566f54aeb45c6e803142
+Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl331.zip
+# Source0-md5:	3e93e5aa0b33fb1d5b05b099f01e0afe
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
+BuildRequires:	python-devel
+BuildRequires:	python-setuptools
+BuildRequires:  rpm-pythonprov
+%pyrequires_eq  python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	libcl.so
 
 %description
 The cryptlib encryption library provides an easy-to-use interface
@@ -56,6 +64,18 @@ Static cryptlib library.
 %description static -l pl.UTF-8
 Statyczna biblioteka cryptlib.
 
+%package -n python-cryptlib
+Summary:	Python bindings for cryptlib
+Summary(pl.UTF-8):	Wiązania języka Python do biblioteki cryptlib
+Group:		Libraries/Python
+Requires:	python >= 1:2.4
+
+%description -n python-cryptlib
+Python bindings for cryptlib library.
+
+%description -n python-cryptlib -l pl.UTF-8
+Wiązania języka Python do biblioteki cryptlib.
+
 %prep
 %setup -q -T -c
 unzip -L -a %{SOURCE0}
@@ -69,14 +89,24 @@ sed -i -e 's/ -O3 / %{rpmcflags} /' makefile
 %{__make} shared \
 	CC="%{__cc}"
 
+ln -sf libcl.so.%{libver} libcl.so
+
+cd bindings
+python setup.py build
+
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{py_sitedir}}
 
 install cryptlib.h $RPM_BUILD_ROOT%{_includedir}
 install libcl.a $RPM_BUILD_ROOT%{_libdir}
-install libcl.so.3.2.2 $RPM_BUILD_ROOT%{_libdir}
-ln -sf libcl.so.3.2.2 $RPM_BUILD_ROOT%{_libdir}/libcl.so
+install libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}
+ln -s %{_libdir}/libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so
+
+cd bindings
+python setup.py install	\
+	--optimize=2	\
+	--root=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,13 +116,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcl.so.3.2.2
+%attr(755,root,root) %{_libdir}/libcl.so.%{libver}
+%{_libdir}/libcl.so
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcl.so
 %{_includedir}/cryptlib.h
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libcl.a
+
+%files -n python-cryptlib
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/*.so
