@@ -10,15 +10,16 @@ License:	sleepycat
 Group:		Libraries
 Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl331.zip
 # Source0-md5:	3e93e5aa0b33fb1d5b05b099f01e0afe
+Patch0:		%{name}-rdtsc.patch
+Patch1:		%{name}-soname.patch
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
+BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-setuptools
+BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
-BuildRequires:	python-devel
-BuildRequires:	python-setuptools
-BuildRequires:  rpm-pythonprov
 %pyrequires_eq  python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	libcl.so
 
 %description
 The cryptlib encryption library provides an easy-to-use interface
@@ -78,7 +79,9 @@ Wiązania języka Python do biblioteki cryptlib.
 
 %prep
 %setup -q -T -c
-unzip -L -a %{SOURCE0}
+unzip -q -L -a %{SOURCE0}
+%patch0 -p1
+%patch1 -p1
 
 sed -i -e 's/ -O3 / %{rpmcflags} /' makefile
 
@@ -101,7 +104,8 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{py_sitedir}}
 install cryptlib.h $RPM_BUILD_ROOT%{_includedir}
 install libcl.a $RPM_BUILD_ROOT%{_libdir}
 install libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}
-ln -s %{_libdir}/libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so
+ln -s libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so.3
+ln -s libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so
 
 cd bindings
 python setup.py install	\
@@ -117,10 +121,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcl.so.%{libver}
-%{_libdir}/libcl.so
+%attr(755,root,root) %ghost %{_libdir}/libcl.so.3
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcl.so
 %{_includedir}/cryptlib.h
 
 %files static
@@ -129,4 +134,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-cryptlib
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/*.so
+%attr(755,root,root) %{py_sitedir}/cryptlib_py.so
+%{py_sitedir}/cryptlib_py-*.egg-info
