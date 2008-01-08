@@ -1,0 +1,40 @@
+--- cryptlib-3.3.1/tools/buildsharedlib.sh.orig	2006-11-14 04:48:16.000000000 +0100
++++ cryptlib-3.3.1/tools/buildsharedlib.sh	2008-01-08 19:51:52.529507506 +0100
+@@ -63,6 +63,8 @@ fi
+ OSNAME=$1
+ LIBNAME=$2
+ LD=$3
++SONAME=$4
++shift
+ shift
+ shift
+ shift
+@@ -97,6 +99,9 @@ case $OSNAME in
+ 		fi
+ 		strip $LIBNAME ;;
+ 
++	'Linux')
++		$LD -shared -o $LIBNAME `cat $LINKFILE` `./tools/getlibs.sh autodetect` -Wl,-soname=${SONAME:-${LIBNAME}}
++		;;
+ 	*)
+ 		$LD -shared -o $LIBNAME `cat $LINKFILE` `./tools/getlibs.sh autodetect` ;
+ 		strip $LIBNAME ;;
+--- cryptlib-3.3.1/makefile.orig	2008-01-08 19:54:03.372389284 +0100
++++ cryptlib-3.3.1/makefile	2008-01-08 19:53:33.007613619 +0100
+@@ -36,6 +36,7 @@
+ PROJ	= cl
+ LIBNAME	= lib$(PROJ).a
+ SLIBNAME = lib$(PROJ).so.$(MAJ).$(MIN).$(PLV)
++SONAME = lib$(PROJ).so.$(MAJ)
+ DYLIBNAME = lib$(PROJ).$(MAJ).$(MIN).dylib
+ 
+ # Compiler options.  By default this builds the release version of the code,
+@@ -1200,7 +1201,7 @@
+ 
+ 
+ $(SLIBNAME):	$(OBJS) $(EXTRAOBJS) $(TESTOBJS)
+-				@./tools/buildsharedlib.sh $(OSNAME) $(SLIBNAME) $(LD) $(OBJS) \
++				@./tools/buildsharedlib.sh $(OSNAME) $(SLIBNAME) $(LD) $(SONAME) $(OBJS) \
+ 					$(EXTRAOBJS)
+ 
+ $(DYLIBNAME):	$(OBJS) $(EXTRAOBJS) $(TESTOBJS)
