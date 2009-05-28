@@ -1,15 +1,16 @@
 #
-%define		libver	3.3.0
+%define		libver	3.3.2
 #
 Summary:	Peter Gutmann's general purpose encryption library
 Summary(pl.UTF-8):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
-Version:	3.3.1
+Version:	3.3.2
+%define		_ver	%(echo %{version} | tr -d .)
 Release:	0.1
 License:	sleepycat
 Group:		Libraries
-Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl331.zip
-# Source0-md5:	3e93e5aa0b33fb1d5b05b099f01e0afe
+Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl%{_ver}.zip
+# Source0-md5:	8736e8a78eb35a4abd3b057420357527
 Patch0:		%{name}-rdtsc.patch
 Patch1:		%{name}-soname.patch
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
