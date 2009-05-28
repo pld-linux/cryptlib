@@ -1,13 +1,11 @@
---- cryptlib-3.3.1/random/unix.c.orig	2007-02-01 01:09:22.000000000 +0100
-+++ cryptlib-3.3.1/random/unix.c	2008-01-08 19:22:02.784685129 +0100
-@@ -102,8 +102,8 @@
+--- cryptlib-3.3.2/random/unix.c.orig	2009-05-12 09:26:50.541650042 +0200
++++ cryptlib-3.3.2/random/unix.c	2009-05-12 09:36:43.777835448 +0200
+@@ -106,7 +106,7 @@
  #if !( defined( __QNX__ ) || defined( __CYGWIN__ ) )
    #include <sys/shm.h>
  #endif /* QNX || Cygwin */
 -#if defined( __linux__ ) && ( defined(__i386__) || defined(__x86_64__) )
--  #include <linux/timex.h>	/* For rdtsc() */
 +#if defined( __linux__ ) && ( defined(__i586__) || defined(__i686__) || defined(__pentium4__) || defined(__athlon__) || defined(__x86_64__) )
-+  #define rdtscl(low) __asm__ __volatile__("rdtsc" : "=a" (low) : : "edx")
+   #include <sys/timex.h>	/* For rdtsc() */
  #endif /* Linux on x86 */
  #include <signal.h>
- #include <sys/socket.h>
