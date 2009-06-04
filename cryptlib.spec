@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gut
 Name:		cryptlib
 Version:	3.3.2
 %define		_ver	%(echo %{version} | tr -d .)
-Release:	0.1
+Release:	1
 License:	sleepycat
 Group:		Libraries
 Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl%{_ver}.zip
