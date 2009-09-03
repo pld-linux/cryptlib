@@ -1,3 +1,14 @@
+--- cryptlib-3.3.1/tools/buildall.sh~	2008-06-30 19:31:02.000000000 +0200
++++ cryptlib-3.3.1/tools/buildall.sh	2009-09-03 13:05:48.696867244 +0200
+@@ -31,7 +31,7 @@
+ 
+ MAJ="3"
+ MIN="3"
+-PLV="2"
++PLV="3"
+ PROJ="cl"
+ SHARED_OBJ_PATH="./shared-obj/"
+ if [ $OSNAME = "Darwin" ] ; then
 --- cryptlib-3.3.1/tools/buildsharedlib.sh.orig	2006-11-14 04:48:16.000000000 +0100
 +++ cryptlib-3.3.1/tools/buildsharedlib.sh	2008-01-08 19:51:52.529507506 +0100
 @@ -63,6 +63,8 @@ fi
