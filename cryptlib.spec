@@ -1,11 +1,11 @@
 #
 %define		libver	3.3.3
 #
+%define		_ver	%(echo %{version} | tr -d .)
 Summary:	Peter Gutmann's general purpose encryption library
 Summary(pl.UTF-8):	Biblioteka kryptograficzna ogólnego przeznaczenia Petera Gutmanna
 Name:		cryptlib
 Version:	3.3.3
-%define		_ver	%(echo %{version} | tr -d .)
 Release:	2
 License:	sleepycat
 Group:		Libraries
@@ -19,6 +19,7 @@ BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
+BuildRequires:	which
 %pyrequires_eq  python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
