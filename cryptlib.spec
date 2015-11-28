@@ -97,7 +97,7 @@ sed -i -e 's/ -O3 / %{rpmcflags} /' makefile
 ln -sf libcl.so.%{libver} libcl.so
 
 cd bindings
-python setup.py build
+%py_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -110,9 +110,7 @@ ln -s libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so.3
 ln -s libcl.so.%{libver} $RPM_BUILD_ROOT%{_libdir}/libcl.so
 
 cd bindings
-python setup.py install	\
-	--optimize=2	\
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
