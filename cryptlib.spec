@@ -14,6 +14,7 @@ Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl%{_ver}.zip
 Patch0:		%{name}-rdtsc.patch
 Patch1:		%{name}-soname.patch
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
+BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
