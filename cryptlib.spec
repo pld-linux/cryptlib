@@ -98,7 +98,7 @@ unzip -q -L -a %{SOURCE0}
 	OPTFLAGS="%{rpmcflags} -DOPENSSL_NO_ASM" \
 %else
 %ifarch %{ix86}
-	OPTFLAGS="%{rpmcflags}" -DUSE_ASM \
+	OPTFLAGS="%{rpmcflags} -DUSE_ASM" \
 %else
 	OPTFLAGS="%{rpmcflags}" \
 %endif
@@ -110,7 +110,7 @@ unzip -q -L -a %{SOURCE0}
 	OPTFLAGS="%{rpmcflags} -DOPENSSL_NO_ASM" \
 %else
 %ifarch %{ix86}
-	OPTFLAGS="%{rpmcflags}" -DUSE_ASM \
+	OPTFLAGS="%{rpmcflags} -DUSE_ASM" \
 %else
 	OPTFLAGS="%{rpmcflags}" \
 %endif
