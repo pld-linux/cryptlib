@@ -1,0 +1,11 @@
+--- cryptlib-3.3.3/session/cmp_rdmsg.c~	2009-07-10 23:39:22.000000000 +0200
++++ cryptlib-3.3.3/session/cmp_rdmsg.c	2015-12-22 23:43:53.932096178 +0100
+@@ -276,7 +276,7 @@
+ 				  "locus %d", errorType, errorLocus ) );
+ 		}
+ 	retExt( errorStatus,
+-			( errorStatus, SESSION_ERRINFO, 
++			( errorStatus, SESSION_ERRINFO, "%s",
+ 			  extErrorInfoPtr->errorString ) );
+ 	}
+ #else

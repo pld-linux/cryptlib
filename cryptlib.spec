@@ -15,6 +15,7 @@ Patch0:		%{name}-rdtsc.patch
 Patch1:		%{name}-soname.patch
 Patch2:		optflags.patch
 Patch3:		x32.patch
+Patch4:		format-security.patch
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	python-devel >= 1:2.5
@@ -89,6 +90,7 @@ unzip -q -L -a %{SOURCE0}
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__make} \
