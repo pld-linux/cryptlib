@@ -1,0 +1,20 @@
+--- cryptlib-3.3.3/crypt/osconfig.h~	2009-05-07 02:07:36.000000000 +0200
++++ cryptlib-3.3.3/crypt/osconfig.h	2015-12-22 09:12:29.940840903 +0100
+@@ -101,7 +101,7 @@
+ #if defined( __FreeBSD__ ) || defined( __bsdi__ ) || \
+ 	defined( __OpenBSD__ ) || defined( __NetBSD__ ) || \
+ 	defined( __linux__ )
+-  #if defined( __x86_64__ ) || defined( __amd64__ )
++  #if (defined( __x86_64__ ) || defined( __amd64__ )) && !defined(__ILP32__)
+ 	/* 64-bit x86 has both 'long' and 'long long' as 64 bits.  In addition
+ 	   we use DES_INT since int's are 64-bit.  We have to check for the
+ 	   64-bit x86 variants before the generic ones because they're a
+@@ -115,7 +115,7 @@
+ 	#define DES_RISC1
+ 	#define DES_UNROLL
+ 	#define RC4_INDEX
+-  #elif defined( __i386__ )
++  #elif defined( __i386__ ) || ((defined( __x86_64__ ) || defined( __amd64__ )) && defined(__ILP32__))
+ 	#define L_ENDIAN
+ 	#define BN_LLONG
+ 	#define DES_PTR

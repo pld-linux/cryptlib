@@ -1,0 +1,15 @@
+--- cryptlib-3.3.3/makefile.orig	2009-07-21 01:02:22.000000000 +0200
++++ cryptlib-3.3.3/makefile	2015-12-22 09:14:14.998537699 +0100
+@@ -1754,10 +1755,10 @@
+ Linux:
+ 	@if uname -m | grep "i[3,4,5,6]86" > /dev/null; then \
+ 		./tools/buildasm.sh $(AS) $(OBJPATH) ; \
+-		make $(DEFINES) EXTRAOBJS="$(ASMOBJS)" CFLAGS="$(CFLAGS) -DUSE_ASM \
++		make $(DEFINES) EXTRAOBJS="$(ASMOBJS)" CFLAGS="$(CFLAGS) $(OPTFLAGS) \
+ 			-fomit-frame-pointer -D_REENTRANT" ; \
+ 	else \
+-		make $(DEFINES) CFLAGS="$(CFLAGS) -fomit-frame-pointer -D_REENTRANT" ; \
++		make $(DEFINES) CFLAGS="$(CFLAGS) $(OPTFLAGS) -fomit-frame-pointer -D_REENTRANT" ; \
+ 	fi
+ 
+ # Mac OS X: BSD variant.  Optimisation level is set via the ccopts.sh script.

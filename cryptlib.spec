@@ -13,6 +13,8 @@ Source0:	ftp://ftp.franken.de/pub/crypt/cryptlib/cl%{_ver}.zip
 # Source0-md5:	afdb94894f7f798702703f4a95a2e7ac
 Patch0:		%{name}-rdtsc.patch
 Patch1:		%{name}-soname.patch
+Patch2:		optflags.patch
+Patch3:		x32.patch
 URL:		http://www.cs.auckland.ac.nz/~pgut001/cryptlib/
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	python-devel >= 1:2.5
@@ -85,14 +87,24 @@ Wiązania języka Python do biblioteki cryptlib.
 unzip -q -L -a %{SOURCE0}
 %patch0 -p1
 %patch1 -p1
-
-sed -i -e 's/ -O3 / %{rpmcflags} /' makefile
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__make} \
+%ifarch x32
+	OPTFLAGS="%{rpmcflags} -DOPENSSL_NO_ASM" \
+%else
+	OPTFLAGS="%{rpmcflags}" \
+%endif
 	CC="%{__cc}"
 
 %{__make} shared \
+%ifarch x32
+	OPTFLAGS="%{rpmcflags} -DOPENSSL_NO_ASM" \
+%else
+	OPTFLAGS="%{rpmcflags}" \
+%endif
 	CC="%{__cc}"
 
 ln -sf libcl.so.%{libver} libcl.so
